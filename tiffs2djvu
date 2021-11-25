@@ -1,0 +1,49 @@
+#!/bin/bash
+
+set -e
+
+if [[ $# -lt 2 ]]
+then echo "Synopsis: tiffs2djvu DIRECTORY OUTPUT.DJVU [cjb2 options]"
+     exit 1
+fi
+
+DIR=$1
+OUTFILE=$2
+
+if [[ $# -gt 2 ]]
+then shift
+     shift
+     CJB2_OPTIONS=$@
+else CJB2_OPTIONS="-dpi 300 -clean"
+fi
+echo "Will use cjb2 options: $CJB2_OPTIONS"
+#exit 0
+
+cd $DIR
+
+mkdir -p pnm
+
+I=1
+ls *.tif | while read TIF
+do PNM=$(printf "page_%04d.pnm" $I)
+   echo "Converting image to PNM: $TIF..."
+   tifftopnm "$TIF" > pnm/$PNM
+   I=$((I+1))
+done
+echo "Converting to PNM done."
+echo .
+
+mkdir -p djvu
+
+ls pnm/*.pnm | while read PNM
+do DJVU=$(basename $PNM .pnm).djvu
+   echo "Converting single page to DJVU: $PNM..."
+   cjb2 $CJB2_OPTIONS $PNM djvu/$DJVU
+done
+echo "Converting to single page DJVU done."
+echo .
+
+echo "Combining single-page DJVU to one multi-page DJVU..."
+djvm -c "$OUTFILE" djvu/*.djvu
+echo "Done."
+

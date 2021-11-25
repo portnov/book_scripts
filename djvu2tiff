@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo ddjvu -format=tiff "$@"
+ddjvu -format=tiff "$@"
