@@ -59,7 +59,10 @@ for line in open(INPUT):
     elif bookmark.input_indent == prev_bookmark.input_indent:
         prev_bookmark.parent.add_child(bookmark)
     else: # bookmark.input_indent < prev_bookmark.input_indent
-        prev_bookmark.parent.parent.add_child(bookmark)
+        parent = prev_bookmark.parent.parent
+        while bookmark.input_indent <= parent.input_indent:
+            parent = parent.parent
+        parent.add_child(bookmark)
     
     prev_bookmark = bookmark
 

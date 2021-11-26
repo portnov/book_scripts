@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 if [[ $# -lt 2 ]]
 then echo "Synopsis: tesseract-djvu.sh INPUT.DJVU PAGESPEC [TESSERACTOPTS]"
