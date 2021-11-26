@@ -4,7 +4,7 @@ import sys
 import re
 import argparse
 
-line_re = re.compile(r"^([ ]*)([^#]+)#([0-9]+)")
+line_re = re.compile(r"^([ ]*)([^#]+)\s+#{0,1}([0-9]+)$")
 
 EPILOG = """
 Input format:
