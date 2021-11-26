@@ -70,3 +70,14 @@ This is a wrapper script around djvused to add bookmarks to DJVU file. Usage:
 
 where BOOKMARKS.TXT is a file with bookmarks in Djvulibre's format.
 
+tesseract-djvu.sh
+-----------------
+
+This script is a wrapper for Tesseract OCR, to recognize text from DJVU files. Usage:
+
+    tesseract-djvu.sh INPUT.DJVU PAGESPEC [TESSERACTOPTS]
+
+For example:
+
+    tesseract-djvu.sh Input.djvu 3-5,10-12 -l rus
+
