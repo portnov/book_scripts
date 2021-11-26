@@ -128,3 +128,14 @@ For example:
 
     tesseract-djvu.sh Input.djvu 3-5,10-12 -l rus
 
+tesseract-pdf.sh
+----------------
+
+This script is a wrapper for Tesseract OCR, to recognize text from PDF files. Usage:
+
+    tesseract-pdf.sh INPUT.PDF PAGESPEC [TESSERACTOPTS]
+
+For example:
+
+    tesseract-pdf.sh Input.pdf 3-7 -l rus --psm 6
+
