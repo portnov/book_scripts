@@ -97,7 +97,7 @@ Or, it can output format used by pdftk toolkit:
 
 Usage:
 
-    prepare_bookmarks.py [--from INDENTS|PDF] [--to DJVU|PDF] [-o OFFSET] BOOKMARKS.INPUT > BOOKMARKS.OUTPUT
+    convert_bookmarks.py [--from INDENTS|PDF] [--to DJVU|PDF|INDENTS] [-o OFFSET] BOOKMARKS.INPUT > BOOKMARKS.OUTPUT
 
 djvu-embed-bookmarks.sh
 -----------------------
