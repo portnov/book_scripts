@@ -115,7 +115,7 @@ This script can be used to embed bookmarks into PDF file. Usage:
 
     pdf-embed-bookmarks.sh INPUT.PDF BOOKMARKS.TXT OUTPUT.PDF [-o offset]
 
-where BOOKMARKS.TXT is in input format for prepare_bookmarks.py.
+where BOOKMARKS.TXT is in input format for convert_bookmarks.py.
 
 tesseract-djvu.sh
 -----------------
