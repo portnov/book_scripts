@@ -92,9 +92,12 @@ class Bookmark(object):
 
     def to_indents(self, indent=0):
         prefix = "  " * indent
-        line = prefix + f"{self.name}        #{self.page}"
+        if self.parent is not None:
+            start = [prefix + f"{self.name}        #{self.page}"]
+        else:
+            start = []
         children = [child.to_indents(indent+1) for child in self.children]
-        lines = [line] + children
+        lines = start + children
         return "\n".join(lines)
 
     @staticmethod

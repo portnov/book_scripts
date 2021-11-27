@@ -21,7 +21,7 @@ INFO=$(mktemp)
 
 pdftk "$INPUT" dump_data_utf8 > $INFO
 
-$HERE/prepare_bookmarks.py -t pdf $OPTS "$BOOKMARKS" >> $INFO
+$HERE/convert_bookmarks.py -t pdf $OPTS "$BOOKMARKS" >> $INFO
 
 pdftk "$INPUT" update_info_utf8 $INFO output "$OUTPUT"
 
