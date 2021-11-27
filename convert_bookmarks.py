@@ -27,7 +27,7 @@ def parse_cmdline():
                 description="Prepare bookmarks for DJVU or PDF document",
                 epilog=EPILOG)
     parser.add_argument('-f', '--from', nargs=1, metavar='INDENTS|PDF', help='Input format of bookmarks', default=['INDENTS'])
-    parser.add_argument('-t', '--to', nargs=1, metavar='DJVU|PDF', help='Output format of bookmarks: DJVU for Djvulibre format, or PDF for Pdftk format.', default=['DJVU'])
+    parser.add_argument('-t', '--to', nargs=1, metavar='DJVU|PDF|INDENTS', help='Output format of bookmarks: DJVU for Djvulibre format, or PDF for Pdftk format.', default=['DJVU'])
     parser.add_argument('-o', '--offset', nargs=1, metavar='OFFSET', type=int, help="Offset for page numbers", default=[0])
     parser.add_argument('input', metavar='INPUT.TXT', help='Path to input file')
     return parser.parse_args()
@@ -88,6 +88,13 @@ class Bookmark(object):
         child_lines = [child.to_pdftk(level+1) for child in self.children]
 
         lines = self_lines + child_lines
+        return "\n".join(lines)
+
+    def to_indents(self, indent=0):
+        prefix = "  " * indent
+        line = prefix + f"{self.name}        #{self.page}"
+        children = [child.to_indents(indent+1) for child in self.children]
+        lines = [line] + children
         return "\n".join(lines)
 
     @staticmethod
@@ -177,14 +184,9 @@ class Bookmark(object):
         
         return root
 
-def output_djvu(root):
-    print(root.to_djvlibre())
-
-def output_pdf(root):
-    print(root.to_pdftk())
-
 args = parse_cmdline()
 from_format = getattr(args, 'from')[0].upper()
+to_format = args.to[0].upper()
 
 if from_format == 'INDENTS':
     bookmarks = Bookmark.parse_indents(args.input)
@@ -196,10 +198,12 @@ else:
 
 bookmarks.apply_offset(args.offset[0])
 
-if args.to[0].lower() == 'djvu':
-    output_djvu(bookmarks)
-elif args.to[0].lower() == 'pdf':
-    output_pdf(bookmarks)
+if to_format == 'DJVU':
+    print(bookmarks.to_djvlibre())
+elif to_format == 'PDF':
+    print(bookmarks.to_pdftk())
+elif to_format == 'INDENTS':
+    print(bookmarks.to_indents())
 else:
     sys.sterr.write("Unsupported output format: " + args.to[0] + "\n")
     

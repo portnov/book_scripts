@@ -32,7 +32,7 @@ Usage:
 
 where DIRECTORY is a directory with (single-page) TIFF files.
 
-prepare_bookmarks.py
+convert_bookmarks.py
 --------------------
 
 This script is aimed to simplify bookmarks creation for DJVU or PDF files.
@@ -97,7 +97,7 @@ Or, it can output format used by pdftk toolkit:
 
 Usage:
 
-    prepare_bookmarks.py [--to DJVU|PDF] [-o OFFSET] BOOKMARKS.INPUT > BOOKMARKS.OUTPUT
+    prepare_bookmarks.py [--from INDENTS|PDF] [--to DJVU|PDF] [-o OFFSET] BOOKMARKS.INPUT > BOOKMARKS.OUTPUT
 
 djvu-embed-bookmarks.sh
 -----------------------
