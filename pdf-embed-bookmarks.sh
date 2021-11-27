@@ -1,9 +1,11 @@
 #!/bin/bash
 
-if [[ $# -lt 2 ]]
+if [[ $# -lt 3 ]]
 then echo "Synopsis: pdf-embed-bookmarks.sh INPUT.PDF BOOKMARKS.TXT OUTPUT.PDF"
      exit 1
 fi
+
+set -e
 
 INPUT=$1
 shift
